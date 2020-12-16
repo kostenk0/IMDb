@@ -46,18 +46,7 @@ class Movie extends React.Component {
                 <img className="nt-movie-poster"
                      src={movie.posterImage}
                      alt="" />
-                <div className="nt-box">
-                  <div className="nt-box-title">
-                    Storyline
-                  </div>
-                  <p className="nt-box-row">
-                    <span>{movie.tagline}</span>
-                  </p>
-                </div>
-              </div>
-              <div className="small-12 medium-8 columns nt-movie-main">
-                <div>
-                  {profile ?
+                 {profile ?
                     <div className="nt-box">
                       <p className="nt-box-row nt-movie-rating">
                         <strong>Your rating: </strong>
@@ -70,6 +59,17 @@ class Movie extends React.Component {
                     :
                     null
                   }
+              </div>
+              <div className="small-12 medium-8 columns nt-movie-main">
+                <div>
+                  <div className="nt-box">
+                  <div className="nt-box-title">
+                    Storyline
+                  </div>
+                  <p className="nt-box-row">
+                    <span>{movie.tagline}</span>
+                  </p>
+                </div>
                   <div className="nt-box">
                     <div className="nt-box-title">
                       Movie Details
@@ -95,14 +95,6 @@ class Movie extends React.Component {
                     </div>
                     <div>{this.renderCast(movie.actors)}</div>
                   </div>
-                </div>
-              </div>
-              <div className="small-12 columns">
-                <div className="nt-box">
-                  <div className="nt-box-title">
-                    Related
-                  </div>
-                  {this.renderRelatedMovies(movie.related)}
                 </div>
               </div>
             </div>
@@ -144,30 +136,6 @@ class Movie extends React.Component {
       </Carousel>);
   }
 
-  renderRelatedMovies(movies) {
-    if (_.isEmpty(movies)) {
-      return null;
-    }
-
-    return (
-      <Carousel>
-        {
-          movies.map(m => {
-            return (
-              <div key={m.id}>
-                <Link to={`/movie/${m.id}`}>
-                  <img src={m.posterImage} alt="" />
-                </Link>
-                <div className="nt-carousel-movie-title">
-                  <Link to={`/movie/${m.id}`}>{m.title}</Link>
-                </div>
-              </div>
-            );
-          })
-        }
-      </Carousel>);
-  }
-
   renderPeople(people) {
     return people.map((p, i) => {
       return (
@@ -201,5 +169,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(MovieActions, dispatch);
 }
 
-// Wrap the component to inject dispatch and state into it
 export default connect(mapStateToProps, mapDispatchToProps)(Movie);
