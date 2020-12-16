@@ -9,13 +9,13 @@ import { connect } from 'react-redux';
 
 class Person extends React.Component {
   componentWillMount() {
-    var {id} = this.props.match.params;
+    var { id } = this.props.match.params;
     this.props.getPerson(id);
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.match.params.id !== this.props.match.params.id) {
-      var {id} = nextProps.match.params;
+    if (nextProps.match.params.id !== this.props.match.params.id) {
+      var { id } = nextProps.match.params;
       this.props.getPerson(id);
     }
   }
@@ -25,12 +25,12 @@ class Person extends React.Component {
   }
 
   render() {
-    var {person} = this.props;
-    var {detail, isFetching} = person;
+    var { person } = this.props;
+    var { detail, isFetching } = person;
 
     return (
       <div className="nt-person">
-        {isFetching ? <Loading/> : null}
+        {isFetching ? <Loading /> : null}
         {detail ?
           <div>
             <div className="row">
@@ -46,52 +46,20 @@ class Person extends React.Component {
               </div>
               <div className="small-12 medium-9 columns nt-person-main">
                 <div>
-                  <div className="nt-box">
-                    <div className="nt-box-title">
-                      Bio
-                    </div>
-                  </div>
-
-                  <div className="nt-box">
-                    <div className="nt-box-title">
-                      Related People
-                    </div>
-                    <div className="nt-box-row">
-                      {isFetching ? <Loading/> : null}
-                      {this.renderRelatedPeople(detail.related)}
-                    </div>
+                  <div className="nt-box-row">
+                    {isFetching ? <Loading /> : null}
+                    {this.renderRelatedMovies('Acted In', detail.actedIn)}
+                    {this.renderRelatedMovies('Directed', detail.directed)}
+                    {this.renderRelatedMovies('Produced', detail.produced)}
+                    {this.renderRelatedMovies('Wrote', detail.wrote)}
                   </div>
                 </div>
               </div>
             </div>
-            {this.renderRelatedMovies('Acted In', detail.actedIn)}
-            {this.renderRelatedMovies('Directed', detail.directed)}
-            {this.renderRelatedMovies('Produced', detail.produced)}
-            {this.renderRelatedMovies('Wrote', detail.wrote)}
           </div>
           : null
         }
       </div>
-    );
-  }
-
-  renderRelatedPeople(actors) {
-    return (
-      <Carousel>
-        {
-          actors.map(a => {
-            return (
-              <div key={a.id}>
-                <Link to={`/person/${a.id}`}>
-                  <img src={a.posterImage} alt="" />
-                </Link>
-                <div className="nt-carousel-actor-name"><Link to={`/person/${a.id}`}>{a.name}</Link></div>
-                <div className="nt-carousel-actor-role">{a.role}</div>
-              </div>
-            );
-          })
-        }
-        </Carousel>
     );
   }
 

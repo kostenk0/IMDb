@@ -3,15 +3,15 @@ import _ from 'lodash';
 import Loading from '../components/Loading.jsx';
 import Carousel from '../components/Carousel.jsx';
 import UserRating from '../components/UserRating.jsx';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import * as MovieActions from '../redux/actions/MovieActions';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 
 class Movie extends React.Component {
   componentDidMount() {
-    var {id} = this.props.match.params;
+    var { id } = this.props.match.params;
     this.props.getMovie(id);
   }
 
@@ -19,7 +19,7 @@ class Movie extends React.Component {
     if (prevProps.match.params.id !== this.props.match.params.id) {
       this.props.clearMovie();
 
-      var {id} = this.props.match.params;
+      var { id } = this.props.match.params;
       this.props.getMovie(id);
     }
   }
@@ -29,11 +29,11 @@ class Movie extends React.Component {
   }
 
   render() {
-    var {isFetching, movie, rateMovie, deleteMovieRating, profile} = this.props;
+    var { isFetching, movie, rateMovie, deleteMovieRating, profile } = this.props;
 
     return (
       <div className="nt-movie">
-        {isFetching ? <Loading/> : null}
+        {isFetching ? <Loading /> : null}
         {movie ?
           <div>
             <div className="row">
@@ -44,32 +44,24 @@ class Movie extends React.Component {
             <div className="row">
               <div className="small-12 medium-4 columns nt-movie-aside">
                 <img className="nt-movie-poster"
-                     src={movie.posterImage}
-                     alt="" />
-                 {profile ?
-                    <div className="nt-box">
-                      <p className="nt-box-row nt-movie-rating">
-                        <strong>Your rating: </strong>
-                        <UserRating movieId={movie.id}
-                                    savedRating={movie.myRating}
-                                    onSubmitRating={rateMovie}
-                                    onDeleteRating={deleteMovieRating}/>
-                      </p>
-                    </div>
-                    :
-                    null
-                  }
+                  src={movie.posterImage}
+                  alt="" />
+                {profile ?
+                  <div className="nt-box">
+                    <p className="nt-box-row nt-movie-rating">
+                      <strong>Your rating: </strong>
+                      <UserRating movieId={movie.id}
+                        savedRating={movie.myRating}
+                        onSubmitRating={rateMovie}
+                        onDeleteRating={deleteMovieRating} />
+                    </p>
+                  </div>
+                  :
+                  null
+                }
               </div>
               <div className="small-12 medium-8 columns nt-movie-main">
                 <div>
-                  <div className="nt-box">
-                  <div className="nt-box-title">
-                    Storyline
-                  </div>
-                  <p className="nt-box-row">
-                    <span>{movie.tagline}</span>
-                  </p>
-                </div>
                   <div className="nt-box">
                     <div className="nt-box-title">
                       Movie Details
@@ -140,9 +132,9 @@ class Movie extends React.Component {
     return people.map((p, i) => {
       return (
         <span key={p.id}>
-        <Link to={`/person/${p.id}`}>{p.name}</Link>
+          <Link to={`/person/${p.id}`}>{p.name}</Link>
           {i < people.length - 1 ? <span>, </span> : null}
-      </span>);
+        </span>);
     });
   }
 
