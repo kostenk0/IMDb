@@ -11,26 +11,25 @@ import { connect } from 'react-redux';
 class Home extends React.Component {
   constructor() {
     super();
-
-    this.renderFeatured = this.renderFeatured.bind(this);
     this.renderByGenre = this.renderByGenre.bind(this);
   }
 
   componentWillMount() {
     this.props.getFeaturedMovies();
-    this.props.getMoviesByGenres(['Adventure', 'Drama']);
+    this.props.getMoviesByGenres(['Adventure', 'Drama', 'Action', 'Children']);
   }
 
   render() {
-    var {movies} = this.props;
+    var { movies } = this.props;
     return (
       <div className="nt-home">
         <div className="row">
           <div className="large-12 columns">
-            {movies.isFetching ? <Loading/> : null}
-            {this.renderFeatured()}
+            {movies.isFetching ? <Loading /> : null}
           </div>
           <div className="large-12 columns">
+            {this.renderByGenre('Children')}
+            {this.renderByGenre('Action')}
             {this.renderByGenre('Adventure')}
             {this.renderByGenre('Drama')}
           </div>
@@ -39,29 +38,8 @@ class Home extends React.Component {
     );
   }
 
-  renderFeatured() {
-    var {movies} = this.props;
-
-    return (
-      <div className="nt-home-featured">
-        <h3 className="nt-home-header">Featured Movies</h3>
-        <ul>
-          { _.compact(movies.featured).map(f => {
-            return (
-              <li key={f.id}>
-                <Link to={`/movie/${f.id}`}>
-                  <img src={f.posterImage} alt="" />
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    );
-  }
-
   renderByGenre(name) {
-    var {movies} = this.props;
+    var { movies } = this.props;
     var moviesByGenre = movies.byGenre[name];
 
     if (_.isEmpty(moviesByGenre)) {
@@ -75,7 +53,7 @@ class Home extends React.Component {
             {name}
           </div>
           <Carousel>
-            { moviesByGenre.map(m => {
+            {moviesByGenre.map(m => {
               return (
                 <div key={m.id}>
                   <Link to={`/movie/${m.id}`}>

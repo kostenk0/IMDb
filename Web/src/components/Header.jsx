@@ -13,7 +13,7 @@ class Header extends React.Component {
     var isLoggedIn = !!_.get(props, 'auth.token');
 
     return (
-      <Navbar bg="dark" variant="dark" fixed="top" >
+      <Navbar bg="dark" variant="dark" sticky="top" >
         <Navbar.Brand href="/">
           <img
             alt=""
