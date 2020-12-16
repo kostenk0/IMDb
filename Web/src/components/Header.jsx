@@ -1,56 +1,41 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import {logout} from '../redux/actions/AuthActions';
-import {connect} from 'react-redux';
+import { logout } from '../redux/actions/AuthActions';
+import { connect } from 'react-redux';
 import _ from 'lodash';
-import logoImg from '../assets/logo.png';
+import logoImg from '../assets/logo.jpg';
+import { Navbar, Nav, Button } from 'react-bootstrap';
+
 
 class Header extends React.Component {
   render() {
-    var {props} = this;
+    var { props } = this;
     var profile = _.get(props, 'profile');
     var isLoggedIn = !!_.get(props, 'auth.token');
 
     return (
-      <nav className="nt-app-header">
-        <div className="nt-app-header-logo">
-          <Link to="/">
-            <img src={logoImg} alt="" />
-          </Link>
-        </div>
-        <ul className="nt-app-header-links">
-          <li>
-            <a className="nt-app-header-link"
-               href="https://github.com/neo4j-examples/neo4j-movies-template"
-               target="_blank"
-               rel="noopener noreferrer">
-              GitHub Project
-            </a>
-          </li>
-        </ul>
-        <div className="nt-app-header-profile-links">
-          <div className="right">
-            {
-              profile ?
-                <div className="nt-app-header-avatar" style={this.getAvatarStyle(profile)}>
-                  <Link to="/profile" title={`profile: ${profile.username}`}/>
-                </div>
-                : null
-            }
-            <div className="log-container">
-              {isLoggedIn ? <button onClick={this.logout.bind(this)} className="buttonLink logout">Log out</button> : <Link to="/login">Log in</Link>}
-            </div>
-            <div>
-              {isLoggedIn ? null : <Link to="/signup">Sign up</Link>}
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar bg="dark" variant="dark" sticky="top">
+        <Navbar.Brand href="/">
+          <img
+            alt=""
+            src={logoImg}
+            width="50"
+            height="50"
+            className="d-inline-block align-top"
+          />{' '}
+      What to watch?
+    </Navbar.Brand>
+        <Nav className="ml-auto">
+          {
+            profile ? <Nav.Link href="/profile" to="/profile">{profile.username}</Nav.Link> : null
+          }
+          <p>&ensp;</p>
+          {isLoggedIn ? <Button onClick={this.logout.bind(this)} variant="outline-danger">Log out</Button> 
+          : <Button href="/login" variant="success">Log in</Button>}
+          <p>&ensp;</p>
+          {isLoggedIn ? null : <Button href="/signup" variant="primary">Sign up</Button>}
+        </Nav>
+      </Navbar>
     );
-  }
-
-  getAvatarStyle(profile) {
-    return {background: `url(${_.get(profile, 'avatar.fullSize')}) center`};
   }
 
   logout() {

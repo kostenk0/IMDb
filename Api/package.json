@@ -1,16 +1,6 @@
 {
-  "name": "neo4j-movies-api",
+  "name": "api",
   "version": "0.0.20",
-  "author": {
-    "name": "The SilveLogic",
-    "email": "info@tsl.io",
-    "url": "tsl.io"
-  },
-  "description": "API for a movie demo app using Neo4j",
-  "repository": {
-    "type": "git",
-    "url": "tbd"
-  },
   "keywords": [
     "node",
     "neo4j",
