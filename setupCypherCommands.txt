@@ -1,20 +1,3 @@
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Craig Miller
-// 01/10/2017
-// File   : UploadAllCsvFiles.cql
-// Project: neo4j-movies-template
-// Model  : 3 nodes: Person, Movie, Genre
-//          6 relations
-// Note   : 1. use CONSTRAINT to handle missing (also creates index)
-//          2. small files so no need to chunk (USING PERIODIC COMMIT 1000)
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Neo4j 3.1.0 Enterprise server is restricted, by default, to import
-// from the %NEO4J_HOME%/import directory, so copy all your csv file
-// to that directory before running this script
-
-// ==================================================================
-// clear the existing database (a better approach would be to delete
-// the %NEO4J_HOME%/data/database/graph.db file)
 MATCH (n)
 WITH n LIMIT 10000
 OPTIONAL MATCH (n)-[r]->()
