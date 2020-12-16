@@ -7,6 +7,7 @@ import ValidatedComponent from '../components/validation/ValidatedComponent.jsx'
 import * as Actions from '../redux/actions/AuthActions';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import { Form, Col, Button, Row } from 'react-bootstrap';
 
 class Login extends React.Component {
   constructor(props) {
@@ -59,50 +60,37 @@ class Login extends React.Component {
     var {errors} = this.props;
 
     return (
-      <div className="ba-login row">
-        <form noValidate>
-          <div className="panel small-12 small-centered columns">
-            <div className="row panel-title">
-              <h3>Log In</h3>
-            </div>
-            <div className="row">
-              <InputValidator fieldName="User name"
-                              errors={errors.username}
-                              shouldValidateOnBlur={true}>
-                <input type="text"
-                       placeholder="User name*"
-                       required
-                       value={username}
-                       onChange={this.changeUser}/>
-              </InputValidator>
-            </div>
-            <div className="row">
-              <InputValidator fieldName="Password"
-                              errors={errors.password}
-                              shouldValidateOnBlur={true}>
-                <input type="password"
-                       name="password"
-                       placeholder="Password*"
-                       required
-                       value={password}
-                       onChange={this.changePassword}/>
-              </InputValidator>
-            </div>
-            <div className="row text-center">
-              <button className="btn"
-                      type="submit"
-                      name="submit-login"
-                      onClick={this.login}
-                      disabled={!canSubmit}>
-                Submit
-              </button>
-            </div>
-            <div className="row text-center">
-              <Link to="/signup">Create an account</Link>
-            </div>
-          </div>
-        </form>
-      </div>
+      <Form>
+        <Form.Group as={Row} controlId="formHorizontalEmail">
+
+          <Form.Label column sm={2}>
+            User name
+    </Form.Label>
+          <Col sm={10}>
+            <Form.Control type="email" placeholder="User name" errors={errors.username} shouldValidateOnBlur={true}
+            value={username} onChange={this.changeUser}/>
+          </Col>
+        </Form.Group>
+
+        <Form.Group as={Row} controlId="formHorizontalPassword">
+          <Form.Label column sm={2}>
+            Password
+          </Form.Label>
+          <Col sm={10}>
+            <Form.Control type="password" placeholder="Password" errors={errors.password} shouldValidateOnBlur={true}
+            value={password} onChange={this.changePassword}/>
+            <Form.Text className="text-muted">
+            <a href='/signup'>Create a new account </a>
+          </Form.Text>
+          </Col>
+        </Form.Group>
+
+        <Form.Group as={Row}>
+          <Col sm={{ span: 10, offset: 5 }}>
+            <Button type="submit" onClick={this.login} disabled={!canSubmit}>Log in</Button>
+          </Col>
+        </Form.Group>
+      </Form>
     );
   }
 
