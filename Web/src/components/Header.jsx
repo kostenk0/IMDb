@@ -23,6 +23,9 @@ class Header extends React.Component {
             className="d-inline-block align-top"
           />{' '} What to watch?
         </Navbar.Brand>
+        <Nav className="mr-auto">
+        <Nav.Link href="/">Home</Nav.Link>
+        </Nav>
         <Nav className="ml-auto">
           {
             profile ? <Nav.Link href="/profile" to="/profile">{profile.username}</Nav.Link> : null

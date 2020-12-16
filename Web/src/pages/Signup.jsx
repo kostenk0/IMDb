@@ -86,19 +86,9 @@ class Signup extends React.Component {
           </Col>
         </Form.Group>
 
-        <Form.Group as={Row} controlId="formHorizontalPassword">
-          <Form.Label column sm={2}>
-            Confirm Password
-    </Form.Label>
-          <Col sm={10}>
-            <Form.Control type="password" placeholder="Confirm Password" errors={errors.password} shouldValidateOnBlur={true}
-              customValidation={() => { return this.validateConfirmPassword(); }} onChange={this.onChange.bind(this, 'confirmPassword')} value={state.confirmPassword} />
-          </Col>
-        </Form.Group>
-
         <Form.Group as={Row}>
           <Col sm={{ span: 10, offset: 5 }}>
-            <Button type="submit" onClick={this.createUser}>Sign in</Button>
+            <Button type="submit" onClick={this.createUser}>Sign up</Button>
           </Col>
         </Form.Group>
       </Form>

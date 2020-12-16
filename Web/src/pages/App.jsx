@@ -5,8 +5,7 @@ import _ from 'lodash';
 import Header from '../components/Header.jsx';
 import {getProfile} from '../redux/actions/ProfileActions';
 import UserSession from '../UserSession';
-// import Footer from '../components/Footer.jsx';
-import Breadcrumbs from '../components/Breadcrumbs.jsx';
+import Footer from '../components/Footer.jsx';
 import NotificationContainer from '../components/common/NotificationContainer.jsx';
 
 import { connect } from 'react-redux';
@@ -20,18 +19,17 @@ class App extends React.Component {
   }
 
   render() {
-    var {auth, profile, movie, person} = this.props;
+    var {auth, profile} = this.props;
 
     return (
       <div className="nt-app">
         <Header auth={auth}
                 profile={profile}/>
-        <Breadcrumbs movie={movie}
-                     person={person}/>
+        <ul></ul>
         <div className="nt-app-page">
           {this.props.children}
         </div>
-        {/*<Footer />*/}
+        <Footer />
         <NotificationContainer />
       </div>
     );
