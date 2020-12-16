@@ -13,24 +13,23 @@ class Header extends React.Component {
     var isLoggedIn = !!_.get(props, 'auth.token');
 
     return (
-      <Navbar bg="dark" variant="dark" sticky="top">
+      <Navbar bg="dark" variant="dark" fixed="top" >
         <Navbar.Brand href="/">
           <img
             alt=""
             src={logoImg}
             width="50"
-            height="50"
+            height="60"
             className="d-inline-block align-top"
-          />{' '}
-      What to watch?
-    </Navbar.Brand>
+          />{' '} What to watch?
+        </Navbar.Brand>
         <Nav className="ml-auto">
           {
             profile ? <Nav.Link href="/profile" to="/profile">{profile.username}</Nav.Link> : null
           }
           <p>&ensp;</p>
-          {isLoggedIn ? <Button onClick={this.logout.bind(this)} variant="outline-danger">Log out</Button> 
-          : <Button href="/login" variant="success">Log in</Button>}
+          {isLoggedIn ? <Button onClick={this.logout.bind(this)} variant="outline-danger">Log out</Button>
+            : <Button href="/login" variant="success">Log in</Button>}
           <p>&ensp;</p>
           {isLoggedIn ? null : <Button href="/signup" variant="primary">Sign up</Button>}
         </Nav>
